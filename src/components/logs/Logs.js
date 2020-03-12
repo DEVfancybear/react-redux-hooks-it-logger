@@ -16,13 +16,15 @@ const Logs = () => {
   const getLogs = async () => {
     // setState của loading
     setLoading(true);
-    //get data to api
-    const data = await axios.get(api + "logs");
-    console.log(data);
+    //fetch data to api
+    const res = await axios.get(api + "logs");
+
+    const data = res.data;
     // set lại state của state logs đã đực khai báo (lưu data tại state logs)
     setLogs(data);
     setLoading(false);
   };
+
   // kiểm tra nếu chưa load dc data sẽ hiện loading
   if (loading) {
     return <h4>...Loading</h4>;
@@ -37,7 +39,9 @@ const Logs = () => {
         {!loading && logs.length === 0 ? (
           <p className="center">No logs to show...</p>
         ) : (
-          logs.map(log => <li>{log.tech}</li>)
+          logs.map(log => {
+            return <li key={log.id}>{log.tech}</li>;
+          })
         )}
       </ul>
     </div>
