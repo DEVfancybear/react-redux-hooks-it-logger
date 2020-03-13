@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
-
-const AddLogModal = () => {
+import { connect } from "react-redux";
+import { addLogs } from "../../actions/logActions";
+const AddLogModal = ({ addLogs }) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
@@ -10,6 +11,17 @@ const AddLogModal = () => {
       M.toast({ html: "Please enter a message and tech" });
     } else {
       console.log(message, tech, attention);
+
+      const newLog = {
+        message,
+        attention,
+        tech,
+        date: new Date()
+      };
+      // đẩy dữ liệu lên server thông qua props đã được dispatch
+      addLogs(newLog);
+      //show thông báo tạo mới log thành công
+      M.toast({ html: `Log added by ${tech}` });
       // clear filde
       setMessage("");
       setTech("");
@@ -82,4 +94,12 @@ const modalStyle = {
   height: "75%"
 };
 
-export default AddLogModal;
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    addLogs: log => {
+      dispatch(addLogs(log));
+    }
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddLogModal);
