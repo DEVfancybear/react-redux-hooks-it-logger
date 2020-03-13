@@ -27,6 +27,7 @@ export default (state = initialState, action) => {
         loading: false
       };
     }
+    // xử lí hiển thị dữ liệu cũ khi click vào sẽ hiện
     case types.SET_CURRENT: {
       return {
         ...state,
@@ -39,13 +40,20 @@ export default (state = initialState, action) => {
         current: null
       };
     }
-    // xử lí update dữ liệu
+    // xử lí update dữ liệu và đẩy lên server
     case types.UPDATE_LOG: {
       return {
         ...state,
         logs: state.logs.map(log =>
           log.id === action.payload.id ? action.payload : log
         )
+      };
+    }
+    // search log
+    case types.SEARCH_LOGS: {
+      return {
+        ...state,
+        logs: action.payload
       };
     }
     case types.SET_LOADING: {

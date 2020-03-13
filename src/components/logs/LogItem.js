@@ -16,6 +16,8 @@ const LogItem = ({ log, deleteLogs, setCurrentLog }) => {
           className={`modal-trigger ${
             log.attention ? "red-text" : "blue-text"
           }`}
+          // truyền vào log là data get về (dữ liệu cũ) để bên components EditLogModal xử lí
+          // khi nào đúng id thì hiện dữ liệu của data đó
           onClick={() => setCurrentLog(log)}
         >
           {log.message}

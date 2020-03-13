@@ -87,7 +87,7 @@ export const updateLogs = log => {
     }
   };
 };
-// set current log (tức là khi click sẽ hiện modal edit)
+// set current log (khi ấn vào nút sửa sẽ hiện data cũ)
 export const setCurrentLog = log => {
   return {
     type: types.SET_CURRENT,
@@ -95,13 +95,33 @@ export const setCurrentLog = log => {
   };
 };
 
-//clear current log (close modal sau khi edit thành công)
+//clear current log
 export const clearCurrentLog = () => {
   return {
     type: types.CLEAR_CURRENT
   };
 };
 
+// search log
+export const searchLogs = text => {
+  return async dispatch => {
+    try {
+      setLoading();
+      const res = await axios.get(api + `logs?q=${text}`);
+      const data = await res.data;
+      dispatch({
+        type: types.SEARCH_LOGS,
+        payload: data
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: types.LOGS_ERROR,
+        payload: err.response
+      });
+    }
+  };
+};
 // set loading to true
 export const setLoading = () => {
   return {

@@ -8,13 +8,15 @@ const EditLogModal = ({ current, updateLogs }) => {
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
   useEffect(() => {
+    // nếu đúng là log khi click vào sửa thì sẽ hiện lên data cũ 
     if (current) {
       setMessage(current.message);
       setTech(current.tech);
       setAttention(current.attention);
     }
   }, [current]);
-  const onSubmit = () => {
+  const onSubmit = e => {
+    e.preventDefault();
     if (message === "" || tech === "") {
       M.toast({ html: "Please enter a message and tech" });
     } else {
@@ -86,7 +88,7 @@ const EditLogModal = ({ current, updateLogs }) => {
       <div className="modal-footer">
         <a
           href="#!"
-          onClick={onSubmit}
+          onClick={e => onSubmit(e)}
           className="modal-close waves-effect blue waves-light btn "
         >
           Enter
