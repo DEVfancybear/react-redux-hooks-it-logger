@@ -1,34 +1,35 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import LogItem from "./LogItem";
 import Preloader from "../layout/Preloader";
-const Logs = () => {
+import { connect } from "react-redux";
+import { getLogs } from "../../actions/logActions";
+const Logs = ({ getLogs, loading, logs }) => {
   // khai báo state kiểu react-hooks: tham số thứ nhất là state ban đầu tham số thứ 2 là setState của tham số thứ nhất,
   // khi nào cần set lại state của tham số thứ nhất thì gọi tham số thứ 2 và truyền state thay đổi vào thì sẽ state lại dc state
   // khai báo url data
-  const api = "http://localhost:3900/";
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const api = "http://localhost:3900/";
+  // const [logs, setLogs] = useState([]);
+  // const [loading, setLoading] = useState(false);
   useEffect(() => {
     // gọi function getlogs qua bằng lifecycle của hooks
     getLogs();
     //eslint-disable-next-line
   }, []);
-  const getLogs = async () => {
-    // setState của loading
-    setLoading(true);
-    //fetch data to api
-    const res = await axios.get(api + "logs");
-    console.log(res);
-    const data = res.data;
-    console.log(data);
-    // set lại state của state logs đã được khai báo (lưu data tại state logs)
-    setLogs(data);
-    setLoading(false);
-  };
+  // const getLogs = async () => {
+  // setState của loading
+  // setLoading(true);
+  //fetch data to api
+  // const res = await axios.get(api + "logs");
+  // console.log(res);
+  // const data = res.data;
+  // console.log(data);
+  // set lại state của state logs đã được khai báo (lưu data tại state logs)
+  //   setLogs(data);
+  //   setLoading(false);
+  // };
 
   // kiểm tra nếu chưa load dc data sẽ hiện loading
-  if (loading) {
+  if (loading || logs === null) {
     return <Preloader />;
   }
   // còn đã có data thì trả về list logs
@@ -49,4 +50,19 @@ const Logs = () => {
   );
 };
 
-export default Logs;
+const mapStateToprops = state => {
+  return {
+    logs: state.logRecuders.logs,
+    loading: state.logRecuders.loading
+  };
+};
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    getLogs: () => {
+      dispatch(getLogs());
+    }
+  };
+};
+
+export default connect(mapStateToprops, mapDispatchToProps)(Logs);
