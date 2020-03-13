@@ -1,51 +1,65 @@
 import React, { useState } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
+import { addTech } from "../../actions/techActions";
+import { connect } from "react-redux";
 
-const AddTechModal = () => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+const AddTechModal = ({ addTech }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
   const onSubmit = () => {
-    if (firstname === "" || lastname === "") {
+    if (firstName === "" || lastName === "") {
       M.toast({ html: "Please enter the first and last name" });
     } else {
-      console.log(firstname, lastname);
-      // clear filde
-      setFirstname("");
-      setLastname("");
+      addTech({
+        firstName,
+        lastName
+      });
+
+      M.toast({ html: `${firstName} ${lastName} was added as a tech` });
+
+      // Clear Fields
+      setFirstName("");
+      setLastName("");
     }
   };
   return (
     <div id="add-tech-modal" className="modal">
       <div className="modal-content">
-        <h4>New Technicial</h4>
+        <h4>New Technician</h4>
         <div className="row">
-          <input
-            type="text"
-            name="firstname"
-            value={firstname}
-            onChange={e => setFirstname(e.target.value)}
-          />
-          <label htmlFor="firstname" className="active">
-            First Name
-          </label>
+          <div className="input-field">
+            <input
+              type="text"
+              name="firstName"
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
+            />
+            <label htmlFor="firstName" className="active">
+              First Name
+            </label>
+          </div>
         </div>
+
         <div className="row">
-          <input
-            type="text"
-            name="lastname"
-            value={lastname}
-            onChange={e => setLastname(e.target.value)}
-          />
-          <label htmlFor="lastname" className="active">
-            Last Name
-          </label>
+          <div className="input-field">
+            <input
+              type="text"
+              name="lastName"
+              value={lastName}
+              onChange={e => setLastName(e.target.value)}
+            />
+            <label htmlFor="lastName" className="active">
+              Last Name
+            </label>
+          </div>
         </div>
       </div>
       <div className="modal-footer">
         <a
           href="#!"
           onClick={onSubmit}
-          className="modal-close waves-effect blue waves-light btn "
+          className="modal-close waves-effect blue waves-light btn"
         >
           Enter
         </a>
@@ -53,5 +67,11 @@ const AddTechModal = () => {
     </div>
   );
 };
-
-export default AddTechModal;
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    addTech: tech => {
+      dispatch(addTech(tech));
+    }
+  };
+};
+export default connect(null, mapDispatchToProps)(AddTechModal);
