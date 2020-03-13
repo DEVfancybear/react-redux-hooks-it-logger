@@ -1,7 +1,11 @@
 import React from "react";
 import Moment from "react-moment";
-
-const LogItem = ({ log }) => {
+import { connect } from "react-redux";
+import { deleteLogs } from "../../actions/logActions";
+const LogItem = ({ log, deleteLogs }) => {
+  const onDeleteLog = id => {
+    deleteLogs(id);
+  };
   return (
     <li className="collection-item">
       <div>
@@ -19,12 +23,22 @@ const LogItem = ({ log }) => {
           <span className="black-text">{log.tech}</span> on{" "}
           <Moment format="MMMM Do YYYY, h:mm:ss a">{log.date}</Moment>
         </span>
-        <a href="#!" className="secondary-content">
+        <a
+          href="#!"
+          onClick={id => onDeleteLog(log.id)}
+          className="secondary-content"
+        >
           <i className="material-icons grey-text">delete</i>
         </a>
       </div>
     </li>
   );
 };
-
-export default LogItem;
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    deleteLogs: id => {
+      dispatch(deleteLogs(id));
+    }
+  };
+};
+export default connect(null, mapDispatchToProps)(LogItem);

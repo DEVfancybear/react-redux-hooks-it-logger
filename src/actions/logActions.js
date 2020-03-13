@@ -43,6 +43,27 @@ export const addLogs = log => {
     }
   };
 };
+// delete log
+// tham số id là id của item log cần xóa khi click
+export const deleteLogs = id => {
+  return async dispatch => {
+    try {
+      setLoading();
+      // thực hiện phương thức post
+      await axios.delete(api + `logs/${id}`);
+      dispatch({
+        type: types.DELETE_LOG,
+        payload: id
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: types.LOGS_ERROR,
+        payload: err.response
+      });
+    }
+  };
+};
 
 // set loading to true
 export const setLoading = () => {

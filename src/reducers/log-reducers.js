@@ -1,5 +1,5 @@
 import * as types from "../constants/ActionTypes";
-
+// action.payload là action đã được dispatch ở folder actions có 1 tham số payload tương ứng vs cái type của nó
 const initialState = {
   logs: null,
   current: null,
@@ -17,6 +17,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         logs: [...state.logs, action.payload],
+        loading: false
+      };
+    }
+    case types.DELETE_LOG: {
+      return {
+        ...state,
+        logs: state.logs.filter(log => log.id !== action.payload),
         loading: false
       };
     }
