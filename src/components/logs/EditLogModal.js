@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import M from "materialize-css/dist/js/materialize.min.js";
 import { updateLogs } from "../../actions/logActions";
 import { connect } from "react-redux";
+import TechSelectOptions from "../techs/TechSelectOptions";
 
 const EditLogModal = ({ current, updateLogs }) => {
   const [message, setMessage] = useState("");
   const [attention, setAttention] = useState(false);
   const [tech, setTech] = useState("");
   useEffect(() => {
-    // nếu đúng là log khi click vào sửa thì sẽ hiện lên data cũ 
+    // nếu đúng là log khi click vào sửa thì sẽ hiện lên data cũ
     if (current) {
       setMessage(current.message);
       setTech(current.tech);
@@ -62,9 +63,7 @@ const EditLogModal = ({ current, updateLogs }) => {
               <option value="" disabled>
                 Select Technicial
               </option>
-              <option value="John Doe">John Doe</option>
-              <option value="Sam Smith">Sam Smith</option>
-              <option value="Sara Wilson">Sara Wilson</option>
+              <TechSelectOptions />
             </select>
           </div>
         </div>
