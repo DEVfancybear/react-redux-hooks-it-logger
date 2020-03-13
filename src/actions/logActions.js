@@ -7,7 +7,7 @@ export const getLogs = () => {
     try {
       setLoading();
       const res = await axios.get(api + "logs");
-      const data = res.data;
+      const data = await res.data;
       dispatch({
         type: types.GET_LOGS,
         payload: data
@@ -29,7 +29,7 @@ export const addLogs = log => {
       setLoading();
       // thực hiện phương thức post
       const res = await axios.post(api + "logs", log);
-      const data = res.data;
+      const data = await res.data;
       dispatch({
         type: types.ADD_LOG,
         payload: data
@@ -62,6 +62,43 @@ export const deleteLogs = id => {
         payload: err.response
       });
     }
+  };
+};
+// update log and push to server
+// log là tham số là 1 obj gốm các dữ liệu điền vào sau khi enter sẽ dc update thay cho dữ liệu cũ, trong log gồm
+// các trường, bao gồm trường id dùng để tìm ra log nào đang dc update
+export const updateLogs = log => {
+  return async dispatch => {
+    try {
+      setLoading();
+      // thực hiện phương thức post
+      const res = await axios.put(api + `logs/${log.id}`, log);
+      const data = await res.data;
+      dispatch({
+        type: types.UPDATE_LOG,
+        payload: data
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: types.LOGS_ERROR,
+        payload: err.response
+      });
+    }
+  };
+};
+// set current log (tức là khi click sẽ hiện modal edit)
+export const setCurrentLog = log => {
+  return {
+    type: types.SET_CURRENT,
+    payload: log
+  };
+};
+
+//clear current log (close modal sau khi edit thành công)
+export const clearCurrentLog = () => {
+  return {
+    type: types.CLEAR_CURRENT
   };
 };
 

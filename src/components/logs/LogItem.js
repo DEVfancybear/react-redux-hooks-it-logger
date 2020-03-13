@@ -1,10 +1,12 @@
 import React from "react";
 import Moment from "react-moment";
+import M from "materialize-css/dist/js/materialize.min.js";
 import { connect } from "react-redux";
-import { deleteLogs } from "../../actions/logActions";
-const LogItem = ({ log, deleteLogs }) => {
+import { deleteLogs, setCurrentLog } from "../../actions/logActions";
+const LogItem = ({ log, deleteLogs, setCurrentLog }) => {
   const onDeleteLog = id => {
     deleteLogs(id);
+    M.toast({ html: "Delete Log Succes !" });
   };
   return (
     <li className="collection-item">
@@ -14,6 +16,7 @@ const LogItem = ({ log, deleteLogs }) => {
           className={`modal-trigger ${
             log.attention ? "red-text" : "blue-text"
           }`}
+          onClick={() => setCurrentLog(log)}
         >
           {log.message}
         </a>
@@ -38,6 +41,9 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     deleteLogs: id => {
       dispatch(deleteLogs(id));
+    },
+    setCurrentLog: log => {
+      dispatch(setCurrentLog(log));
     }
   };
 };
