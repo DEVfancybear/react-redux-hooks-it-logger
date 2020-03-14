@@ -18,7 +18,7 @@ const LogItem = ({ log, deleteLogs, setCurrentLog }) => {
           }`}
           // truyền vào log là data get về (dữ liệu cũ) để bên components EditLogModal xử lí
           // khi nào đúng id thì hiện dữ liệu của data đó
-          onClick={() => setCurrentLog(log)}
+          onClick={() => setCurrentLog(log.id)}
         >
           {log.message}
         </a>
@@ -44,8 +44,8 @@ const mapDispatchToProps = (dispatch, props) => {
     deleteLogs: id => {
       dispatch(deleteLogs(id));
     },
-    setCurrentLog: log => {
-      dispatch(setCurrentLog(log));
+    setCurrentLog: id => {
+      dispatch(setCurrentLog(id));
     }
   };
 };

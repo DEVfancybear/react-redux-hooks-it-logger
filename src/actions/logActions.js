@@ -88,10 +88,26 @@ export const updateLogs = log => {
   };
 };
 // set current log (khi ấn vào nút sửa sẽ hiện data cũ)
-export const setCurrentLog = log => {
-  return {
-    type: types.SET_CURRENT,
-    payload: log
+// id là tham số chính là id của log cần chỉnh sửa, truyền id này vào thì sẽ get dc data của log cũ tương
+// ứng vs id đó
+export const setCurrentLog = id => {
+  return async dispatch => {
+    try {
+      setLoading();
+      // truyền id của log cần get data cũ về
+      const res = await axios.get(api + `logs/${id}`);
+      const data = await res.data;
+      dispatch({
+        type: types.SET_CURRENT,
+        payload: data
+      });
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: types.LOGS_ERROR,
+        payload: err.response
+      });
+    }
   };
 };
 
