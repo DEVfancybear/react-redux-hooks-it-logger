@@ -8,10 +8,13 @@ export const getLogs = (page) => {
         const limit = 10;
         try {
             setLoading();
+            // eslint-disable-next-line no-useless-concat
             const res = await fetch(api + "logs" + `?_page=${page}&_limit=${limit}`);
+            // eslint-disable-next-line no-useless-concat
             console.log(api + "logs" + `?_page=${page}&_limit=${limit}`);
-            const data = await res.json();
             const totalItems = await res.headers.get("X-Total-Count");
+            console.log(totalItems)
+            const data = await res.json();
             dispatch({
                 type: types.GET_LOGS,
                 payload: data,

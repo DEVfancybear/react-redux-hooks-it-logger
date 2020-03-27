@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83161819-4e75-4640-971d-cb9762bbb558" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/data/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/data/db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/actions/logActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/logActions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/logs/Logs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/logs/Logs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/reducers/log-reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/log-reducers.js" afterDir="false" />
@@ -43,11 +40,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585282184740</updated>
-      <workItem from="1585282186548" duration="1298000" />
+      <workItem from="1585282186548" duration="2869000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="490" y="134" width="1000" height="846" key="#Notifications" timestamp="1585284772931">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state x="490" y="134" width="1000" height="846" key="#Notifications/70.27.1850.1053@70.27.1850.1053" timestamp="1585284772931" />
   </component>
 </project>

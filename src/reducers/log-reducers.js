@@ -12,6 +12,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         // xử lí get data logs trên server
         case types.GET_LOGS: {
+            console.log(action.totalItems)
             return {
                 ...state, logs: action.payload, loading: false, page: action.page,
                 totalItems: action.totalItems

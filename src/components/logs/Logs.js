@@ -48,7 +48,6 @@ const Logs = ({getLogs, logRecuders: {loading, logs, page, totalItems}}) => {
                     logs.map((log, index) => <LogItem log={log} key={index}/>) //truyền props cho component LogItem
                 )}
             </ul>
-            <div className="pagination p1">
                 <Pagination
                     disabledClass={"disabled-navigation"}
                     prevPageText={"<"}
@@ -56,10 +55,9 @@ const Logs = ({getLogs, logRecuders: {loading, logs, page, totalItems}}) => {
                     hideFirstLastPages
                     activePage={page}
                     // itemsCountPerPage={this.props.data.numItemsPerPage}
-                    totalItemsCount={totalItems}
+                    totalItemsCount={+totalItems}
                     onChange={getLogs}
                 />
-            </div>
         </div>
     );
 };
